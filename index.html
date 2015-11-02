@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>SpecailaAdTs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<style>
+    html, body
+    {
+        margin: 0px 0px;
+        width: 100%;
+        height: 100%;
+    }
+    iframe
+    {
+        margin: 0px 0px;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+    </script>
+  </head>
+
+  <body>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+              <h4>父组件地盘</h4>
+              <blockquote>
+                  <p>静态单向传递:{{one_way_static_prop}}</p>
+              </blockquote>
+              <blockquote>
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label for="test" class="col-md-6">动态单向传递:{{one_way_sync_prop}}</label>
+                          <div class="col-md-6">
+                              <input id="test" v-model="one_way_sync_prop" class="form-control" placeholder="改变它">
+                          </div>
+                      </div>
+                  </form>
+                  </p>
+                  <p>也可以通过控制台:Parent.one_way_sync_prop改变值看看</p>
+              </blockquote>
+              <blockquote>
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label for="sync_parent" class="col-md-6">动态双向传递:{{two_way_prop}}</label>
+                          <div class="col-md-6">
+                              <input id="sync_parent" v-model="two_way_prop" class="form-control" placeholder="改变它">
+                          </div>
+                      </div>
+                  </form>
+                  </p>
+                  <p>也可以通过控制台:Parent.two_way_prop改变值看看</p>
+              </blockquote>
+              </p>
+          </div>
+          <div class="col-md-6">
+              <h4>子组件地盘</h4>
+              <parent_child_data
+                  one_way_static_prop="只要女"
+                  v-bind:dynamicsinglefromparent="one_way_sync_prop"
+                  v-bind:syncfromparent.sync="two_way_prop"
+              ></parent_child_data>
+          </div>
+      </div>
+  </div>
+
+  <!--<iframe-component v-if="selectedChannel"></iframe-component>-->
+  <!--<default-component></default-component>-->
+  <!--<compare-component v-if="ad_page_url"></compare-component>-->
+
+  <!-- /.container -->
+
+  <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="dist/main.js"></script>
+
+  </body>
+</html>
