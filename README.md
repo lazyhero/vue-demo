@@ -7,3 +7,7 @@
 ###父子组件传值
 
 ![p-c-props](http://7jpswm.com1.z0.glb.clouddn.com/vuevue-demo-1.gif)
+
+# 使用方式
+* 直接下载index.html和dist/main.js 调试需要.map文件
+* 源码全部下载 npm install --> gulp即可
