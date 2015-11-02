@@ -24,16 +24,19 @@ var Parent = new Vue({
         one_way_static_prop: "以在子组件上显示传递的值为准",//单向绑定 直接在这里定义是不可以的
         one_way_sync_prop: "我会动",//动态单向绑定
         two_way_prop:"男女通吃",//双向绑定
-        once_prop:"封建社会"
+        once_prop:"封建社会",//这个用的少吧？最后放……
+        dispatch_para_parent:"看右边无耻的按钮"
+    },
+    methods:{
+        paraToChild:function(){
+            this.$broadcast('parent-msg', this.dispatch_para_parent);
+        }
+    },
+    events: {
+        'child-msg': function (msg) {
+            this.dispatch_para_parent = msg;
+        }
     }
-    //events: {
-    //    'navigation-msg': function (msg) {
-    //        this.selectedChannel = msg;
-    //    },
-    //    'navigation-url-msg':function(msg){
-    //        this.ad_page_url = msg;
-    //    }
-    //}
 })
 
 

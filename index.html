@@ -72,7 +72,13 @@
                   </p>
                   <p>也可以通过控制台:Parent.two_way_prop改变值看看</p>
               </blockquote>
-              </p>
+              <blockquote>
+                  <p>事件方式方式:{{dispatch_para_parent}}</p>
+                  <p><button @click="paraToChild()" class="default">点击传消息给子</button></p>
+                  <p>基于事件驱动,父子直接关联的参数通过编码硬关联,倒是很灵活</p>
+                  <p>dispatch,由子到父传播-自下到上 直到最顶层组件 沿途组件均可接收到</p>
+                  <p>broadcast,由父到子传播-自上到下 遇到return false即停止</p>
+              </blockquote>
           </div>
           <div class="col-md-6">
               <h4>子组件地盘</h4>

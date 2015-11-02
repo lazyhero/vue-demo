@@ -78,16 +78,19 @@
 	        one_way_static_prop: "以在子组件上显示传递的值为准",//单向绑定 直接在这里定义是不可以的
 	        one_way_sync_prop: "我会动",//动态单向绑定
 	        two_way_prop:"男女通吃",//双向绑定
-	        once_prop:"封建社会"
+	        once_prop:"封建社会",//这个用的少吧？最后放……
+	        dispatch_para_parent:"看右边无耻的按钮"
+	    },
+	    methods:{
+	        paraToChild:function(){
+	            this.$broadcast('parent-msg', this.dispatch_para_parent);
+	        }
+	    },
+	    events: {
+	        'child-msg': function (msg) {
+	            this.dispatch_para_parent = msg;
+	        }
 	    }
-	    //events: {
-	    //    'navigation-msg': function (msg) {
-	    //        this.selectedChannel = msg;
-	    //    },
-	    //    'navigation-url-msg':function(msg){
-	    //        this.ad_page_url = msg;
-	    //    }
-	    //}
 	})
 	
 	
@@ -10867,6 +10870,7 @@
 	        props:['one_way_static_prop','dynamicsinglefromparent','syncfromparent'],
 	        data :function() {
 	            return {
+	                dispatch_para_child:"要把我给父!"
 	            }
 	        },
 	        ready:function(){
@@ -10874,8 +10878,13 @@
 	            window.Child = this;
 	        },
 	        methods:{
-	            test:function(){
-	
+	            paraToParent:function(){
+	                this.$dispatch('child-msg', this.dispatch_para_child+""+(new Date().getTime()));
+	            }
+	        },
+	        events: {
+	            'parent-msg': function (msg) {
+	                this.dispatch_para_child = msg;
 	            }
 	        }
 	    }
@@ -10884,7 +10893,7 @@
 /* 77 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"center-block\" >\n            <blockquote>\n                <p>静态单向：{{one_way_static_prop}}</p>\n            </blockquote>\n            <blockquote>\n                <p>动态单向：{{dynamicsinglefromparent}}</p>\n            </blockquote>\n                <blockquote>\n                    <form class=\"form-horizontal\">\n                        <div class=\"form-group\">\n                            <label for=\"sync_child\" class=\"col-md-6\">动态双向{{syncfromparent}}</label>\n                            <div class=\"col-md-6\">\n                                <input id=\"sync_child\" v-model=\"syncfromparent\" class=\"form-control\" placeholder=\"改变它\">\n                            </div>\n                        </div>\n                    </form>\n                    </p>\n                    <p>也可以通过控制台:Child.syncfromparent 改变值看看</p>\n                </blockquote>\n        </div>";
+	module.exports = "<div class=\"center-block\" >\n            <blockquote>\n                <p>静态单向：{{one_way_static_prop}}</p>\n            </blockquote>\n            <blockquote>\n                <p>动态单向：{{dynamicsinglefromparent}}</p>\n            </blockquote>\n            <blockquote>\n                <form class=\"form-horizontal\">\n                    <div class=\"form-group\">\n                        <label for=\"sync_child\" class=\"col-md-6\">动态双向{{syncfromparent}}</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"sync_child\" v-model=\"syncfromparent\" class=\"form-control\" placeholder=\"改变它\">\n                        </div>\n                    </div>\n                </form>\n                </p>\n                <p>也可以通过控制台:Child.syncfromparent 改变值看看</p>\n            </blockquote>\n            <blockquote>\n                <p>事件方式：{{dispatch_para_child}}</p>\n                <button @click=\"paraToParent()\" class=\"default\">点按钮把消息传给父</button>\n            </blockquote>\n        </div>";
 
 /***/ }
 /******/ ]);
