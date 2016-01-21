@@ -1,21 +1,12 @@
 var Vue = require("vue")
+var vueTouch = require('vue-touch')
+Vue.use(vueTouch)
 var dom =  document;
 var parent_child_data = Vue.extend(require('./component/parent_child_data.vue'));
-//var iframeComponent = Vue.extend(require('./component/iframe.vue'));
-//var defaultComponent = Vue.extend(require('./component/default.vue'));
-//var compareComponent = Vue.extend(require('./component/compare.vue'));
-//var giftComponent = Vue.extend(require('./views/gift.vue'));
-//var taskComponent = Vue.extend(require('./views/task.vue'));
-//var myComponent = Vue.extend(require('./views/my.vue'));
+
 
 //全局注册
 Vue.component('parent_child_data', parent_child_data);
-//Vue.component('iframe-component', iframeComponent);
-//Vue.component('default-component', defaultComponent);
-//Vue.component('compare-component', compareComponent);
-//Vue.component('gift-component', giftComponent);
-//Vue.component('task-component', taskComponent);
-//Vue.component('my-component', myComponent);
 
 //根组件
 var Parent = new Vue({
@@ -30,11 +21,28 @@ var Parent = new Vue({
     methods:{
         paraToChild:function(){
             this.$broadcast('parent-msg', this.dispatch_para_parent);
+        },
+        esc:function(){
+            alert("关闭");
+        },
+        testTap:function(){
+            console.info("123");
         }
     },
     events: {
         'child-msg': function (msg) {
             this.dispatch_para_parent = msg;
+        }
+    },
+    components: {
+        'my-component': {
+            template: '<div style="color: blue;">参看官网对<strong>is</strong>特性的描述大家可能不太理解,这一行就是官网示例</div>'
+        },
+        'wrong-component': {
+            template: '<div style="color:red;">如果不按照官网示例写呢?下场就是现在(其实我的位置应该在第三行)</div>'
+        },
+        'butright': {
+            template: '<div style="color:green;">我这行也没按照官网来,为毛对？<br>因为我在td标签里</div>'
         }
     }
 })

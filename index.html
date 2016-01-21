@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,89 +16,136 @@
     <!-- Custom styles for this template -->
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<style>
-    html, body
-    {
-        margin: 0px 0px;
-        width: 100%;
-        height: 100%;
-    }
-    iframe
-    {
-        margin: 0px 0px;
-        width: 100%;
-        height: 100%;
-    }
-</style>
+    <style>
+        html, body {
+            margin: 0px 0px;
+            width: 100%;
+            height: 100%;
+        }
+
+        iframe {
+            margin: 0px 0px;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
     </script>
-  </head>
+</head>
 
-  <body>
-  <div class="container">
-      <div class="row">
-          <div class="col-md-6">
-              <h4>父组件地盘</h4>
-              <blockquote>
-                  <p>静态单向传递:{{one_way_static_prop}}</p>
-              </blockquote>
-              <blockquote>
-                  <form class="form-horizontal">
-                      <div class="form-group">
-                          <label for="test" class="col-md-6">动态单向传递:{{one_way_sync_prop}}</label>
-                          <div class="col-md-6">
-                              <input id="test" v-model="one_way_sync_prop" class="form-control" placeholder="改变它">
-                          </div>
-                      </div>
-                  </form>
-                  </p>
-                  <p>也可以通过控制台:Parent.one_way_sync_prop改变值看看</p>
-              </blockquote>
-              <blockquote>
-                  <form class="form-horizontal">
-                      <div class="form-group">
-                          <label for="sync_parent" class="col-md-6">动态双向传递:{{two_way_prop}}</label>
-                          <div class="col-md-6">
-                              <input id="sync_parent" v-model="two_way_prop" class="form-control" placeholder="改变它">
-                          </div>
-                      </div>
-                  </form>
-                  </p>
-                  <p>也可以通过控制台:Parent.two_way_prop改变值看看</p>
-              </blockquote>
-              <blockquote>
-                  <p>事件方式方式:{{dispatch_para_parent}}</p>
-                  <p><button @click="paraToChild()" class="default">点击传消息给子</button></p>
-                  <p>基于事件驱动,父子直接关联的参数通过编码硬关联,倒是很灵活</p>
-                  <p>dispatch,由子到父传播-自下到上 直到最顶层组件 沿途组件均可接收到</p>
-                  <p>broadcast,由父到子传播-自上到下 遇到return false即停止</p>
-              </blockquote>
-          </div>
-          <div class="col-md-6">
-              <h4>子组件地盘</h4>
-              <parent_child_data
-                  one_way_static_prop="只要女"
-                  v-bind:dynamicsinglefromparent="one_way_sync_prop"
-                  v-bind:syncfromparent.sync="two_way_prop"
-              ></parent_child_data>
-          </div>
-      </div>
-  </div>
+<body>
+<div class="container" @keyup.esc="esc()">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>父组件地盘</h4>
+            <blockquote>
+                <p>静态单向传递:{{one_way_static_prop}}</p>
+            </blockquote>
+            <blockquote>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="test" class="col-md-6">动态单向传递:{{one_way_sync_prop}}</label>
 
-  <!--<iframe-component v-if="selectedChannel"></iframe-component>-->
-  <!--<default-component></default-component>-->
-  <!--<compare-component v-if="ad_page_url"></compare-component>-->
+                        <div class="col-md-6">
+                            <input id="test" v-model="one_way_sync_prop" class="form-control" placeholder="改变它">
+                        </div>
+                    </div>
+                </form>
+                </p>
+                <p>也可以通过控制台:Parent.one_way_sync_prop改变值看看</p>
+            </blockquote>
+            <blockquote>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="sync_parent" class="col-md-6">动态双向传递:{{two_way_prop}}</label>
 
-  <!-- /.container -->
+                        <div class="col-md-6">
+                            <input id="sync_parent" v-model="two_way_prop" class="form-control" placeholder="改变它">
+                        </div>
+                    </div>
+                </form>
+                </p>
+                <p>也可以通过控制台:Parent.two_way_prop改变值看看</p>
+            </blockquote>
+            <blockquote>
+                <p>事件方式方式:{{dispatch_para_parent}}</p>
 
-  <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="dist/main.js"></script>
+                <p>
+                    <button @click="paraToChild()" class="default">点击传消息给子</button>
+                </p>
+                <p>基于事件驱动,父子直接关联的参数通过编码硬关联,倒是很灵活</p>
 
-  </body>
+                <p>dispatch,由子到父传播-自下到上 直到最顶层组件 沿途组件均可接收到</p>
+
+                <p>broadcast,由父到子传播-自上到下 遇到return false即停止</p>
+            </blockquote>
+        </div>
+        <div class="col-md-6">
+            <h4>子组件地盘</h4>
+            <parent_child_data
+                    one_way_static_prop="只要女"
+                    v-bind:dynamicsinglefromparent="one_way_sync_prop"
+                    v-bind:syncfromparent.sync="two_way_prop"
+                    ></parent_child_data>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+        </tr>
+        <tr is="my-component">
+        </tr>
+        <tr>
+            <td>
+                <butright></butright>
+            </td>
+        </tr>
+        <tr>
+            <wrong-component></wrong-component>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <h3>vue-touch</h3>
+    <div v-touch:tap="testTap" style="width: 8rem;height: 8rem;background-color: #003366;color: #fff">tap</div>
+</div>
+
+<!--<iframe-component v-if="selectedChannel"></iframe-component>-->
+<!--<default-component></default-component>-->
+<!--<compare-component v-if="ad_page_url"></compare-component>-->
+
+<!-- /.container -->
+
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="dist/main.js"></script>
+
+</body>
 </html>

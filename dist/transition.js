@@ -44,60 +44,27 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2);
+	module.exports = __webpack_require__(3);
 
 
 /***/ },
 /* 1 */,
-/* 2 */
+/* 2 */,
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Vue = __webpack_require__(3)
-	var vueTouch = __webpack_require__(5)
+	var Vue = __webpack_require__(4)
+	var vueTouch = __webpack_require__(6)
 	Vue.use(vueTouch)
-	var dom =  document;
-	var parent_child_data = Vue.extend(__webpack_require__(7));
-	
 	
 	//全局注册
-	Vue.component('parent_child_data', parent_child_data);
+	Vue.component('home', __webpack_require__(8))
 	
 	//根组件
 	var Parent = new Vue({
 	    el: 'body',
 	    data: {
-	        one_way_static_prop: "以在子组件上显示传递的值为准",//单向绑定 直接在这里定义是不可以的
-	        one_way_sync_prop: "我会动",//动态单向绑定
-	        two_way_prop:"男女通吃",//双向绑定
-	        once_prop:"封建社会",//这个用的少吧？最后放……
-	        dispatch_para_parent:"看右边无耻的按钮"
-	    },
-	    methods:{
-	        paraToChild:function(){
-	            this.$broadcast('parent-msg', this.dispatch_para_parent);
-	        },
-	        esc:function(){
-	            alert("关闭");
-	        },
-	        testTap:function(){
-	            console.info("123");
-	        }
-	    },
-	    events: {
-	        'child-msg': function (msg) {
-	            this.dispatch_para_parent = msg;
-	        }
-	    },
-	    components: {
-	        'my-component': {
-	            template: '<div style="color: blue;">参看官网对<strong>is</strong>特性的描述大家可能不太理解,这一行就是官网示例</div>'
-	        },
-	        'wrong-component': {
-	            template: '<div style="color:red;">如果不按照官网示例写呢?下场就是现在(其实我的位置应该在第三行)</div>'
-	        },
-	        'butright': {
-	            template: '<div style="color:green;">我这行也没按照官网来,为毛对？<br>因为我在td标签里</div>'
-	        }
+	        currentView:"home"
 	    }
 	})
 	
@@ -106,7 +73,7 @@
 	window.Parent = Parent;
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -9633,10 +9600,10 @@
 	}
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -9733,14 +9700,14 @@
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	;(function () {
 	
 	  var vueTouch = {}
 	  var Hammer =  true
-	    ? __webpack_require__(6)
+	    ? __webpack_require__(7)
 	    : window.Hammer
 	  var gestures = ['tap', 'pan', 'pinch', 'press', 'rotate', 'swipe']
 	  var customeEvents = {}
@@ -9850,7 +9817,7 @@
 	})()
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.6 - 2015-12-23
@@ -12424,32 +12391,32 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(8)
-	module.exports = __webpack_require__(12)
-	module.exports.template = __webpack_require__(13)
+	__webpack_require__(9)
+	module.exports = __webpack_require__(13)
+	module.exports.template = __webpack_require__(19)
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(9);
+	var content = __webpack_require__(10);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(11)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./parent_child_data.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./parent_child_data.vue");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./home.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./home.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -12459,10 +12426,10 @@
 	}
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(10)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 	
 	
@@ -12473,7 +12440,7 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	/*
@@ -12529,7 +12496,7 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -12754,38 +12721,111 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
+	        var Panel = __webpack_require__(14);
+	        module.exports = {
+	            data :function() {
+	                return {
+	                    isShowBottomBtn:false,
+	                    isOpenPanel:false
+	                }
+	            },
+	            ready:function(){
+	            },
+	            methods:{
+	                openPanel:function(){
+	                    this.isOpenPanel = true;
+	                }
+	            },
+	            components:{
+	                Panel:Panel
+	            }
+	        }
+	    }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(15)
+	module.exports = __webpack_require__(17)
+	module.exports.template = __webpack_require__(18)
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(16);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./panel.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./panel.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 17 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	        props:['one_way_static_prop','dynamicsinglefromparent','syncfromparent'],
 	        data :function() {
 	            return {
-	                dispatch_para_child:"要把我给父!"
 	            }
 	        },
 	        ready:function(){
 	//            调试用
-	            window.Child = this;
 	        },
 	        methods:{
-	            paraToParent:function(){
-	                this.$dispatch('child-msg', this.dispatch_para_child+""+(new Date().getTime()));
-	            }
-	        },
-	        events: {
-	            'parent-msg': function (msg) {
-	                this.dispatch_para_child = msg;
+	            back:function(){
+	                this.$parent.isOpenPanel = false;
 	            }
 	        }
 	    }
 
 /***/ },
-/* 13 */
+/* 18 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"center-block\" >\n            <blockquote>\n                <p>静态单向：{{one_way_static_prop}}</p>\n            </blockquote>\n            <blockquote>\n                <p>动态单向：{{dynamicsinglefromparent}}</p>\n            </blockquote>\n            <blockquote>\n                <form class=\"form-horizontal\">\n                    <div class=\"form-group\">\n                        <label for=\"sync_child\" class=\"col-md-6\">动态双向{{syncfromparent}}</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"sync_child\" v-model=\"syncfromparent\" class=\"form-control\" placeholder=\"改变它\">\n                        </div>\n                    </div>\n                </form>\n                </p>\n                <p>也可以通过控制台:Child.syncfromparent 改变值看看</p>\n            </blockquote>\n            <blockquote>\n                <p>事件方式：{{dispatch_para_child}}</p>\n                <button @click=\"paraToParent()\" class=\"default\">点按钮把消息传给父</button>\n            </blockquote>\n        </div>";
+	module.exports = "<div class=\"center-block page-current\" transition=\"page\">\n            <div>面板内容</div>\n            <div>面板内容</div>\n            <div>面板内容</div>\n            <div>面板内容</div>\n            <div v-touch:tap=\"back\" style=\"background-color: #461006;color: #fff;font-weight: 600\">动作:返回</div>\n        </div>";
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"center-block page\" v-bind:class=\"{'page-current':!isOpenPanel}\">\n            <div>首页内容</div>\n            <div>首页内容</div>\n            <div>首页内容</div>\n            <div>首页内容</div>\n            <div v-touch:tap=\"openPanel\" style=\"background-color: #003366;color: white;font-weight: 600\">动作:打开面板</div>\n        </div>\n        <panel v-if=\"isOpenPanel\"></panel>";
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=transition.js.map

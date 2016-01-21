@@ -1,7 +1,7 @@
 var gulp = require('gulp')
 var webpack = require('gulp-webpack')
 var named = require('vinyl-named')
-var appList = ['main']
+var appList = ['transition']
 
 
 gulp.task('default', ['bundle'], function() {
